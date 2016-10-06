@@ -2,7 +2,6 @@ package EntFix;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -40,7 +39,7 @@ public class Functions {
 				} else {
 					item[i] = new ItemStack(Material.AIR, 0);
 				}
-				new Scheduler("onKick", new Object[]{p}).runTaskLater(EntFix.getPlugin(EntFix.class), 5);
+				new Scheduler(2, new Object[]{p}).runTaskLater(EntFix.getPlugin(EntFix.class), 5);
 			}
 		}
 		obj.put("b", b);

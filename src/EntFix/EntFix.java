@@ -1,4 +1,5 @@
 package EntFix;
+
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,6 +13,6 @@ public class EntFix extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new EntListener(this), this);
 		getLogger().info("EntFix Enabled!");
-		new Scheduler("removeEnt", new Object[]{b}).runTaskTimer(this, 20, 20);
+		new Scheduler(1, new Object[]{b}).runTaskTimer(this, 20, 20);
 	}
 }
