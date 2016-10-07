@@ -66,7 +66,7 @@ public class EntListener implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		if(!e.getPlayer().hasPermission("unsafe.enchantments")) {;
+		if(!e.getPlayer().hasPermission("unsafe.enchantments")) {
 			if (e.getItem() != null) {
 				ItemStack item = e.getItem();
 				if(ReflectFunctions.checkAttributes(item) || Functions.removeEnt(item)) {
