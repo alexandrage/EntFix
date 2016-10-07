@@ -66,7 +66,7 @@ public class EntListener implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		if(!e.getPlayer().hasPermission("unsafe.enchantments")) {
+		if(!e.getPlayer().hasPermission("unsafe.enchantments")) {;
 			if (e.getItem() != null) {
 				ItemStack item = e.getItem();
 				if(ReflectFunctions.checkAttributes(item) || Functions.removeEnt(item)) {
@@ -110,8 +110,8 @@ public class EntListener implements Listener {
     	} else {
     		player.put(p, player.get(p)+1);
     		if(playertime.get(p)<System.currentTimeMillis()) {
-    			if(player.get(p)>12) {
-    				e.getPlayer().kickPlayer("");
+    			if(player.get(p)>100) {
+    				e.getPlayer().kickPlayer("§4Кикнут с сервера, причина:Фаст интеракт");
     			}
 	    		player.remove(p);
 	    		playertime.remove(p);
