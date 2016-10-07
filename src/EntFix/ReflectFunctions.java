@@ -3,8 +3,8 @@ package EntFix;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
-
 import org.bukkit.Material;
+
 public class ReflectFunctions {
 	static Class<?> nbtTagCompoundClass;
 	static Object nbtTagCompound;
@@ -14,10 +14,18 @@ public class ReflectFunctions {
 		}
 
 		try {
+			//Без рефлексии. Чуть больше производительности, но требует компиляцию под конкретную версию nms пакета.
+			/*
+			net.minecraft.server.v1_10_R1.NBTTagCompound tag = new net.minecraft.server.v1_10_R1.NBTTagCompound();
+			String NBTS = org.bukkit.craftbukkit.v1_10_R1.inventory.CraftItemStack.asNMSCopy(item).save(tag).toString();
+			*/
+			
+			//Использование рефлексии, делает плагин рабочим почти на всех версиях.
 			nbtTagCompoundClass = getNmsClass("NBTTagCompound");
 			nbtTagCompound = nbtTagCompoundClass.getConstructor().newInstance();
 			Object nmsItemStack = getNmsCraftClass("inventory.CraftItemStack").getMethod("asNMSCopy", ItemStack.class).invoke(null, item);
 			String NBTS = getNmsClass("ItemStack").getMethod("save", nbtTagCompoundClass).invoke(nmsItemStack, nbtTagCompound).toString();
+			
 			if ((NBTS.contains("BlockEntityTag:") && NBTS.contains("Items:")) || NBTS.contains("CustomPotionEffects:") || NBTS.contains("AttributeModifiers:") || NBTS.contains("Unbreakable:") || NBTS.contains("ClickEvent") || NBTS.contains("run_command") || NBTS.contains("open_file") || NBTS.contains("open_url") || NBTS.contains("suggest_command") || NBTS.contains("CustomName:")) {
 				return true;
 			}
@@ -55,9 +63,4 @@ public class ReflectFunctions {
 	public static Class<?> getNmsCraftClass(String nmsClassName) throws ClassNotFoundException {
 		return Class.forName("org.bukkit.craftbukkit." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + "." + nmsClassName);
 	}
-
-	public static String getServerVersion() {
-		return Bukkit.getServer().getClass().getPackage().getName().substring(23);
-	}
-	
 }
