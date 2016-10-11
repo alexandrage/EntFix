@@ -111,7 +111,7 @@ public class EntListener implements Listener {
     		player.put(p, player.get(p)+1);
     		if(playertime.get(p)<System.currentTimeMillis()) {
     			if(player.get(p)>100) {
-    				e.getPlayer().kickPlayer("§4Кикнут с сервера, причина:Фаст интеракт");
+    				e.getPlayer().kickPlayer("§4Фаст интеракт!");
     			}
 	    		player.remove(p);
 	    		playertime.remove(p);
