@@ -3,17 +3,17 @@ package EntFix;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
+
 import org.bukkit.Material;
 
 public class ReflectFunctions {
-	static Class<?> nbtTagCompoundClass;
-	static Object nbtTagCompound;
 	public static boolean checkAttributes(ItemStack item){
 		if(item==null || item.getType()==Material.AIR || item.getAmount()<1 || item.getAmount()>64) {
 			return false;
 		}
 
 		try {
+			
 			//Без рефлексии. Чуть больше производительности, но требует компиляцию под конкретную версию nms пакета.
 			/*
 			net.minecraft.server.v1_10_R1.NBTTagCompound tag = new net.minecraft.server.v1_10_R1.NBTTagCompound();
@@ -21,8 +21,8 @@ public class ReflectFunctions {
 			*/
 			
 			//Использование рефлексии, делает плагин рабочим почти на всех версиях.
-			nbtTagCompoundClass = getNmsClass("NBTTagCompound");
-			nbtTagCompound = nbtTagCompoundClass.getConstructor().newInstance();
+			Class<?> nbtTagCompoundClass = getNmsClass("NBTTagCompound");
+			Object nbtTagCompound = nbtTagCompoundClass.getConstructor().newInstance();
 			Object nmsItemStack = getNmsCraftClass("inventory.CraftItemStack").getMethod("asNMSCopy", ItemStack.class).invoke(null, item);
 			String NBTS = getNmsClass("ItemStack").getMethod("save", nbtTagCompoundClass).invoke(nmsItemStack, nbtTagCompound).toString();
 			
@@ -51,7 +51,7 @@ public class ReflectFunctions {
 				return true;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		return false;
 	}
