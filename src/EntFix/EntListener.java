@@ -30,7 +30,7 @@ public class EntListener implements Listener {
 			if(!p.hasPermission("unsafe.enchantments")) {
 				for(ItemStack item : p.getInventory().getArmorContents()) {
 					Functions.removeEnt(item);
-					if(ReflectFunctions.checkAttributes(item)) {
+					if(Functions.checkAttributes(item)) {
 						p.getInventory().remove(item);
 					}
 				}
@@ -42,7 +42,7 @@ public class EntListener implements Listener {
 	public void onPickupItem(PlayerPickupItemEvent e) {
 		if(!e.getPlayer().hasPermission("unsafe.enchantments")) {
 			Item item = e.getItem();
-			if(ReflectFunctions.checkAttributes(item.getItemStack()) || Functions.removeEnt(item.getItemStack())) {
+			if(Functions.checkAttributes(item.getItemStack()) || Functions.removeEnt(item.getItemStack())) {
 				e.setCancelled(true);
 			}
 		}
@@ -53,7 +53,7 @@ public class EntListener implements Listener {
 		if(!e.getWhoClicked().hasPermission("unsafe.enchantments")) {
 			if (e.getCurrentItem() != null) {
 				ItemStack item = e.getCurrentItem();
-				if(ReflectFunctions.checkAttributes(item) || Functions.removeEnt(item)) {
+				if(Functions.checkAttributes(item) || Functions.removeEnt(item)) {
 					e.getWhoClicked().getInventory().remove(item);
 					e.setCancelled(true);
 				}
@@ -67,7 +67,7 @@ public class EntListener implements Listener {
 		if(!e.getPlayer().hasPermission("unsafe.enchantments")) {
 			if (e.getItem() != null) {
 				ItemStack item = e.getItem();
-				if(ReflectFunctions.checkAttributes(item) || Functions.removeEnt(item)) {
+				if(Functions.checkAttributes(item) || Functions.removeEnt(item)) {
 					e.setCancelled(true);
 					if(this.plugin.b) {
 						e.getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));//1.9++
@@ -84,7 +84,7 @@ public class EntListener implements Listener {
 	public void onItemDrop(PlayerDropItemEvent e) {
 		if(!e.getPlayer().hasPermission("unsafe.enchantments")) {
 			Item item = e.getItemDrop();
-			if(ReflectFunctions.checkAttributes(item.getItemStack()) || Functions.removeEnt(item.getItemStack())) {
+			if(Functions.checkAttributes(item.getItemStack()) || Functions.removeEnt(item.getItemStack())) {
 				e.setCancelled(true);
 			}
 		}
@@ -92,7 +92,7 @@ public class EntListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
 	public void onBlockDispenseEvent(BlockDispenseEvent e) {
-		if(ReflectFunctions.checkAttributes(e.getItem())) {
+		if(Functions.checkAttributes(e.getItem())) {
 			e.setCancelled(true);
 		}
 	}
