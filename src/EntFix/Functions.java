@@ -39,7 +39,7 @@ public class Functions {
 				} else {
 					item[i] = new ItemStack(Material.AIR, 0);
 				}
-				new Scheduler(2, new Object[]{p}).runTaskLater(EntFix.getPlugin(EntFix.class), 5);
+				new Kick(p).runTaskLater(EntFix.getPlugin(EntFix.class), 5);
 			}
 		}
 		obj.put("b", b);
