@@ -1,5 +1,4 @@
 package EntFix;
-import java.util.HashMap;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -14,7 +13,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class EntListener implements Listener {
@@ -96,35 +94,6 @@ public class EntListener implements Listener {
 	public void onBlockDispenseEvent(BlockDispenseEvent e) {
 		if(ReflectFunctions.checkAttributes(e.getItem())) {
 			e.setCancelled(true);
-		}
-	}
-	
-	HashMap<String, Long> player = new HashMap<String, Long>();
-	HashMap<String, Long> playertime = new HashMap<String, Long>();
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-    public void on(PlayerInteractEvent e) {
-    	String p = e.getPlayer().getName();
-    	if(player.get(p) == null) {
-    		player.put(p, 0l);
-    		playertime.put(p, System.currentTimeMillis()+1000);
-    	} else {
-    		player.put(p, player.get(p)+1);
-    		if(playertime.get(p)<System.currentTimeMillis()) {
-    			if(player.get(p)>100) {
-    				e.getPlayer().kickPlayer("§4Фаст интеракт!");
-    			}
-	    		player.remove(p);
-	    		playertime.remove(p);
-    		}
-    	}
-    }
-	
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-	public void on(PlayerQuitEvent e) {
-		String p = e.getPlayer().getName();
-		if(player.get(p) != null) {
-    		player.remove(p);
-    		playertime.remove(p);
 		}
 	}
 }
