@@ -11,7 +11,7 @@ public class Scheduler extends Thread {
 	public void run() {
 		for(;;) {
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {}
 			Runs.removeEnt(this.b);
 		}
