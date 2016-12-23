@@ -53,8 +53,12 @@ public class Functions {
 	}
 	
 	public static boolean checkAttributes(ItemStack item){
-		if(item==null || item.getType()==Material.AIR || item.getAmount()<1 || item.getAmount()>64) {
+		if(item==null || item.getType()==Material.AIR) {
 			return false;
+		}
+		
+		if(item.getAmount()<1 || item.getAmount()>64) {
+			return true;
 		}
 
 		try {
@@ -63,25 +67,25 @@ public class Functions {
 			if ((NBTS.contains("BlockEntityTag:") && NBTS.contains("Items:")) || NBTS.contains("CustomPotionEffects:") || NBTS.contains("AttributeModifiers:") || NBTS.contains("Unbreakable:") || NBTS.contains("ClickEvent") || NBTS.contains("run_command") || NBTS.contains("open_file") || NBTS.contains("open_url") || NBTS.contains("suggest_command") || NBTS.contains("CustomName:")) {
 				return true;
 			}
-			if(NBTS.contains("minecraft:skull") && NBTS.contains("SkullOwner:") && NBTS.contains("Properties:") && NBTS.contains("textures:") && NBTS.contains("Value:")) {
+			if(NBTS.contains("SkullOwner:") && NBTS.contains("Properties:") && NBTS.contains("textures:") && NBTS.contains("Value:")) {
 				String value = new String(Base64.decodeBase64(NBTS.split("Value:")[1].split("}]},")[0]));
 				if(!value.contains("timestamp") && !value.contains("profileId") && !value.contains("profileName") && !value.contains("textures")) {
 					return true;
 				}
 			}
-			if(NBTS.contains("minecraft:spawn_egg") && (NBTS.contains("Size:") ||  NBTS.contains("DeathLootTable:") || NBTS.contains("ActiveEffects:") || NBTS.contains("Profession:") || NBTS.contains("powered:") || NBTS.contains("Type:"))) {
+			if((NBTS.contains("Size:") ||  NBTS.contains("DeathLootTable:") || NBTS.contains("ActiveEffects:") || NBTS.contains("Profession:") || NBTS.contains("powered:") || NBTS.contains("Type:"))) {
 				return true;
 			}
-			if(NBTS.contains("minecraft:structure_block")) {
+			if(item.getType() == Material.matchMaterial("STRUCTURE_BLOCK")) {
 				return true;
 			}
-			if(NBTS.contains("minecraft:structure_void")) {
+			if(item.getType() == Material.matchMaterial("BARRIER")) {
 				return true;
 			}
-			if(NBTS.contains("minecraft:barrier")) {
+			if(item.getType() == Material.matchMaterial("BARRIER")) {
 				return true;
 			}
-			if(NBTS.contains("minecraft:armor_stand") && NBTS.contains("EntityTag:")) {
+			if(item.getType() == Material.matchMaterial("ARMOR_STAND") && NBTS.contains("EntityTag:")) {
 				return true;
 			}
 		} catch (Exception e) {
