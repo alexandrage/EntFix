@@ -82,9 +82,6 @@ public class Functions {
 			if(item.getType() == Material.matchMaterial("BARRIER")) {
 				return true;
 			}
-			if(item.getType() == Material.matchMaterial("BARRIER")) {
-				return true;
-			}
 			if(item.getType() == Material.matchMaterial("STRUCTURE_VOID")) {
 				return true;
 			}
