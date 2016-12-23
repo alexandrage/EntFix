@@ -73,7 +73,7 @@ public class Functions {
 					return true;
 				}
 			}
-			if((NBTS.contains("Size:") ||  NBTS.contains("DeathLootTable:") || NBTS.contains("ActiveEffects:") || NBTS.contains("Profession:") || NBTS.contains("powered:") || NBTS.contains("Type:"))) {
+			if((item.getType() == Material.MONSTER_EGG && NBTS.contains("Size:") ||  NBTS.contains("DeathLootTable:") || NBTS.contains("ActiveEffects:") || NBTS.contains("Profession:") || NBTS.contains("powered:") || NBTS.contains("Type:"))) {
 				return true;
 			}
 			if(item.getType() == Material.matchMaterial("STRUCTURE_BLOCK")) {
