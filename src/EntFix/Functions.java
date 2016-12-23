@@ -85,6 +85,9 @@ public class Functions {
 			if(item.getType() == Material.matchMaterial("BARRIER")) {
 				return true;
 			}
+			if(item.getType() == Material.matchMaterial("STRUCTURE_VOID")) {
+				return true;
+			}
 			if(item.getType() == Material.matchMaterial("ARMOR_STAND") && NBTS.contains("EntityTag:")) {
 				return true;
 			}
