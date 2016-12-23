@@ -59,7 +59,7 @@ public class Functions {
 
 		try {
 			NbtCompound tag = (NbtCompound) NbtFactory.fromItemTag(item);
-			String NBTS = tag.toString();
+			String NBTS = tag.toString().replace("\"", "");
 			if ((NBTS.contains("BlockEntityTag:") && NBTS.contains("Items:")) || NBTS.contains("CustomPotionEffects:") || NBTS.contains("AttributeModifiers:") || NBTS.contains("Unbreakable:") || NBTS.contains("ClickEvent") || NBTS.contains("run_command") || NBTS.contains("open_file") || NBTS.contains("open_url") || NBTS.contains("suggest_command") || NBTS.contains("CustomName:")) {
 				return true;
 			}
