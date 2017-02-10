@@ -76,17 +76,16 @@ public class Functions {
 			if((item.getType() == Material.MONSTER_EGG && NBTS.contains("Size:") ||  NBTS.contains("DeathLootTable:") || NBTS.contains("ActiveEffects:") || NBTS.contains("Profession:") || NBTS.contains("powered:") || NBTS.contains("Type:"))) {
 				return true;
 			}
-			if(item.getType() == Material.matchMaterial("STRUCTURE_BLOCK")) {
-				return true;
-			}
-			if(item.getType() == Material.matchMaterial("BARRIER")) {
-				return true;
-			}
-			if(item.getType() == Material.matchMaterial("STRUCTURE_VOID")) {
+			if(item.getType() == Material.matchMaterial("STRUCTURE_BLOCK") || item.getType() == Material.matchMaterial("BARRIER") || item.getType() == Material.matchMaterial("STRUCTURE_VOID")) {
 				return true;
 			}
 			if(item.getType() == Material.matchMaterial("ARMOR_STAND") && NBTS.contains("EntityTag:")) {
 				return true;
+			}
+			if(item.getType() == Material.matchMaterial("ENDER_PEARL") || item.getType() == Material.matchMaterial("SNOW_BALL") || item.getType() == Material.matchMaterial("NAME_TAG")) {
+                if (NBTS.length() > 400 || NBTS.contains("NaNd")) {
+                    return true;
+                }
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
