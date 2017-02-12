@@ -52,6 +52,7 @@ public class Functions {
 		return obj;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static boolean checkAttributes(ItemStack item){
 		if(item==null || item.getType()==Material.AIR) {
 			return false;
@@ -82,10 +83,15 @@ public class Functions {
 			if(item.getType() == Material.matchMaterial("ARMOR_STAND") && NBTS.contains("EntityTag:")) {
 				return true;
 			}
-			if(item.getType() == Material.matchMaterial("ENDER_PEARL") || item.getType() == Material.matchMaterial("SNOW_BALL") || item.getType() == Material.matchMaterial("NAME_TAG")) {
+			if(item.getType() == Material.ENDER_PEARL || item.getType() == Material.SNOW_BALL || item.getType() == Material.NAME_TAG) {
                 if (NBTS.length() > 400 || NBTS.contains("NaNd")) {
                     return true;
                 }
+			}
+			if(item.getType() == Material.ANVIL) {
+				if(item.getData().getData()>2) {
+					return true;
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
