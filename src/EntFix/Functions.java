@@ -83,8 +83,11 @@ public class Functions {
 			if(item.getType() == Material.matchMaterial("ARMOR_STAND") && NBTS.contains("EntityTag:")) {
 				return true;
 			}
-			if(item.getType() == Material.ENDER_PEARL || item.getType() == Material.SNOW_BALL || item.getType() == Material.NAME_TAG) {
-                if (NBTS.length() > 400 || NBTS.contains("NaNd")) {
+			if(tag.getKeys().size() > 15) {
+                return true;
+			}
+			if(item.getType() == Material.NAME_TAG) {
+                if (NBTS.length() > 400) {
                     return true;
                 }
 			}
