@@ -13,7 +13,11 @@ public class Kick extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		this.p.kickPlayer("§4Креатив хак запрещен!");
-		Bukkit.getServer().broadcastMessage("§6"+p.getName()+" §4Кикнут с сервера, причина:Креатив хак");
+		if(EntFix.kick) {
+			this.p.kickPlayer("§4Креатив хак запрещен!");
+		}
+		if(EntFix.broadcast) {
+			Bukkit.getServer().broadcastMessage("§6"+p.getName()+" §4Кикнут с сервера, причина:Креатив хак");
+		}
 	}
 }
